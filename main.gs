@@ -92,7 +92,7 @@ function rastrearObjeto(codigoRastreio) {
         Logger.log("Objeto entregue. Data de entrega: " + dataHora.split(" | ")[0]);
         return {
           status: status,
-          dataEntrega: dataHora.split(" | ")[0] // Retorna apenas a data
+          dataEntrega: dataHora.split(" | ")[0] 
         };
       } else {
         Logger.log("Objeto ainda não entregue. Status: " + status);
