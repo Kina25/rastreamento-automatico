@@ -3,7 +3,7 @@ function rastrearStatus() {
   var lastRow = sheet.getLastRow(); 
   
   Logger.log("Iniciando o processo de rastreamento...");
-
+//Selecione a linha que o script irá começar a rodar aqui
   for (var linha = 2; linha <= lastRow; linha++) {
     Logger.log("Processando linha " + linha + "...");
 
@@ -12,7 +12,7 @@ function rastrearStatus() {
       Logger.log("Linha " + linha + " já está com status ENTREGUE. Pulando...");
       continue; 
     }
-
+        //Segue a ordem Rastreio > Status > Data de entrega
     Logger.log("Iniciando rastreio para o conjunto 1 na linha " + linha);
     rastrearCodigo(sheet, linha, "A", "B", "C");
     
@@ -77,17 +77,17 @@ function rastrearObjeto(codigoRastreio) {
     var html = response.getContentText();
     var $ = Cheerio.load(html);
 
-    // Encontra a seção de status
+    
     var statusSection = $('.linha_status').first(); 
     if (statusSection.length > 0) {
       var status = statusSection.find('li').eq(0).text().trim(); 
       var dataHora = statusSection.find('li').eq(2).text().trim(); 
 
-      // Limpa o texto do status e da data
+     
       status = status.replace(/^Status:\s*/, ""); 
       dataHora = dataHora.replace(/^Data:\s*/, ""); 
 
-      // Verifica se o status indica entrega
+      
       if (status.toLowerCase().includes("entregue")) {
         Logger.log("Objeto entregue. Data de entrega: " + dataHora.split(" | ")[0]);
         return {
@@ -116,7 +116,7 @@ function rastrearObjeto(codigoRastreio) {
     };
   }
 }
-
+    //Para adicionar novos status dos rastreios
 function substituirTexto(sheet, colunas, linha) {
   var substituicoes = {
     "Status: Objeto em transferência - por favor aguarde": "EM TRÂNSITO",
